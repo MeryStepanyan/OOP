@@ -24,6 +24,10 @@ CLI Instruction Set defines all the available commands and flags for interacting
 -Apply background images
 -Add borders and effects
 
+**Presentation Mode**
+- Full-screen slide show
+- Navigate using keyboard (Next(n)/Previous(p)/Quit(q))
+
 **File Managment**
 -Save presentation
 -Open existing files
