@@ -28,8 +28,8 @@ CLI Instruction Set defines all the available commands and flags for interacting
 -Add borders and effects to enhance visual appearance.
 
 **Presentation Mode**
-- Full-screen slide show
-- Navigate using keyboard (Next(n)/Previous(p)/Quit(q))
+- Full-screen slide show.
+- Navigate using keyboard (Next(n)/Previous(p)/Quit(q)).
 
 **File Managment**
 -Save presentation as .pptx.
@@ -38,11 +38,10 @@ CLI Instruction Set defines all the available commands and flags for interacting
 
 **CLI Customization**
 -Every command supports flags and arguments for flexibility.
--Clear error messages if command are incorrect
+-Clear error messages if command are incorrect.
 -Consistent help command(--help) to display available options.
 
 ## Tech Stack
--C++
--OOP
--Command Line Interface
--PPTX generation library
+-C++ - the main programming language.
+-Command Line Interface for interacting with the program.
+-PPTX generation library if we want to directly generate .pptx files (e.g., libpptx or other libraries).
