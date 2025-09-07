@@ -17,7 +17,7 @@ CLI Instruction Set defines all the available commands and flags for interacting
 **Text Handling**
 -Insert text boxes
 -Customize text font, size and color
--Edit or remove existing text##
+-Edit or remove existing text
 
 **Slide Styling**
 -Set background color
