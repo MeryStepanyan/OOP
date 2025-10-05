@@ -1,5 +1,6 @@
 #pragma once
 #include<iostream>
+#include <string>
 
 enum class EType {
 	Value,
@@ -7,12 +8,14 @@ enum class EType {
 	Num,
 	String,
 	Symbol,
-	End
+	End,
+	EndLine
 };
 
 struct SToken {
 	std::string value;
 	EType type;
+	SToken() :value(""), type(EType::End) {}
 	SToken(const std::string& value, EType type) :value(value), type(type) {}
 };
 
