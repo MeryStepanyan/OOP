@@ -6,8 +6,8 @@
 
 class Parser {
 public:
-    Parser(Tokenizer& tokenizer);
+    Parser(std::istream& stream):m_tokenizer(stream){}
     SCommand parseCommand();
 private:
-    Tokenizer& m_tokenizer;
+    Tokenizer m_tokenizer;
 };
