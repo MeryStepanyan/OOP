@@ -1,16 +1,13 @@
 ////// CLI.cpp : This file contains the 'main' function. Program execution begins and ends there.
 
- 
-
-
 #include <iostream>
 #include "Tokenizer.h"
 #include "Parser.h"
 #include "Commands.h"
 
 int main() {
-    Tokenizer tokenizer(std::cin);
-    Parser parser(tokenizer);
+
+    Parser parser(std::cin);
      
     while (true) {
         SCommand cmd = parser.parseCommand();
