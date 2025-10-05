@@ -1,16 +1,21 @@
 #include "Tokenizer.h"
+#include <cctype>
 
 SToken Tokenizer::getToken() {
 	std::string buffer;
-	EType type = EType::Value;
 
-	while (m_input && std::isspace(m_input.peek()))
-		m_input.get();
-
+	while (m_input && std::isspace(m_input.peek())) {
+		if (m_input.peek() == '\n'){
+			m_input.get();
+		return SToken("", EType::End);
+	}
+	m_input.get();
+}
 	if (!m_input)
 		return SToken("", EType::End);
 
 	char ch = m_input.peek();
+
 	if (ch == '"' || ch == '\'') {
 		char quote = m_input.get();
 		while (m_input.get(ch)) {
@@ -18,8 +23,7 @@ SToken Tokenizer::getToken() {
 				break;
 			buffer += ch;
 		}
-		type = EType::String;
-		return SToken(buffer, type);
+		return SToken(buffer, EType::String);
 	}
 	
 	if (std::isdigit(ch)) {
@@ -27,8 +31,7 @@ SToken Tokenizer::getToken() {
 			m_input.get(ch);
 			buffer += ch;
 		}	
-		type = EType::Num;
-		return SToken(buffer, type);
+		return SToken(buffer, EType::Num);
 	}
 
 	if (std::isalpha(ch)) {
@@ -36,12 +39,10 @@ SToken Tokenizer::getToken() {
 			m_input.get(ch);
 			buffer += ch;
 		}
-		type = EType::Word;
-		return SToken(buffer, type);
+		return SToken(buffer, EType::Word);
 	}
 
 	m_input.get(ch);
 	buffer += ch;
-	type = EType::Symbol;
-	return SToken(buffer, type);
+	return SToken(buffer, EType::Symbol);
 }
