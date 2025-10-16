@@ -1,48 +1,47 @@
 #include "Tokenizer.h"
 #include <cctype>
 
-SToken Tokenizer::getToken() {
-	std::string buffer;
 
-	while (m_input && std::isspace(m_input.peek())) {
-		if (m_input.peek() == '\n'){
-			m_input.get();
-		return SToken("", EType::End);
-	}
-	m_input.get();
-}
-	if (!m_input)
-		return SToken("", EType::End);
+SToken Tokenizer::getToken(std::istream& input) {
+    char ch;
 
-	char ch = m_input.peek();
+    while (input.get(ch)) {
+        if (std::isspace(ch)) {
+            if (ch == '\n') return SToken("", EType::EndLine);
+            continue;
+        }
 
-	if (ch == '"' || ch == '\'') {
-		char quote = m_input.get();
-		while (m_input.get(ch)) {
-			if (ch == quote)
-				break;
-			buffer += ch;
-		}
-		return SToken(buffer, EType::String);
-	}
-	
-	if (std::isdigit(ch)) {
-		while (m_input && (std::isdigit(m_input.peek()) || m_input.peek() == '.')) {
-			m_input.get(ch);
-			buffer += ch;
-		}	
-		return SToken(buffer, EType::Num);
-	}
+        std::string buffer;
 
-	if (std::isalpha(ch)) {
-		while (m_input && std::isalnum(m_input.peek())) {
-			m_input.get(ch);
-			buffer += ch;
-		}
-		return SToken(buffer, EType::Word);
-	}
+        if (std::isalpha(ch)) {
+            buffer += ch;
+            while (input.peek() != EOF && std::isalnum(input.peek())) {
+                input.get(ch);
+                buffer += ch;
+            }
+            return SToken(buffer, EType::Word);
+        }
 
-	m_input.get(ch);
-	buffer += ch;
-	return SToken(buffer, EType::Symbol);
+        if (std::isdigit(ch)) {
+            buffer += ch;
+            while (input.peek() != EOF && (std::isdigit(input.peek()) || input.peek() == '.')) {
+                input.get(ch);
+                buffer += ch;
+            }
+            return SToken(buffer, EType::Num);
+        }
+
+        if (ch == '"' || ch == '\'') {
+            char quote = ch;
+            while (input.get(ch) && ch != quote) {
+                buffer += ch;
+            }
+            return SToken(buffer, EType::String);
+        }
+
+        buffer += ch;
+        return SToken(buffer, EType::Symbol);
+    }
+
+    return SToken("", EType::End);
 }
