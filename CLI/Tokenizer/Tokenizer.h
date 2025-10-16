@@ -1,12 +1,27 @@
 #pragma once
-#include<string>
-#include<istream>
-#include "Token.h"
+#include<iostream>
+#include <string>
+#include <memory>
+enum class EType {
+	Value,
+	Word,
+	Num,
+	String,
+	Symbol,
+	End,
+	EndLine
+};
+
+struct SToken {
+	std::string value;
+	EType type;
+	SToken() :value(""), type(EType::End) {}
+	SToken(const std::string& value, EType type) :value(value), type(type) {}
+};
 
 class Tokenizer {
 public:
-	Tokenizer(std::istream& input) :m_input(input) {}
-	SToken getToken();
-private:
-	std::istream& m_input;
+
+	SToken getToken(std::istream& input);
+
 };
