@@ -1,0 +1,59 @@
+========================================
+ПОШАГОВАЯ ПОСЛЕДОВАТЕЛЬНОСТЬ ДЛЯ ТЕСТА
+========================================
+
+Скопируйте и выполните команды по порядку:
+
+ШАГ 1: Создайте презентацию с контентом
+-----------------------------------------
+addslide
+addslide
+addshape slide 0 type Circle radius 25 x 10 y 15
+addshape slide 0 type Rectangle width 40 height 30 x 20 y 25
+addshape slide 1 type Text content "Title" fontSize 16 x 5 y 10
+
+ШАГ 2: Сохраните в файл
+------------------------
+save file demo.json
+
+Ожидаемый вывод:
+"Presentation saved to: demo.json"
+"Presentation saved successfully to: demo.json"
+
+ШАГ 3: Измените презентацию (чтобы увидеть разницу)
+----------------------------------------------------
+removeslide
+removeshape slide 0 index 0
+
+Теперь у вас 1 слайд с 1 фигурой
+
+ШАГ 4: Загрузите сохраненную версию
+-------------------------------------
+load file demo.json
+
+Ожидаемый вывод:
+"Presentation loaded from: demo.json"
+"Presentation loaded successfully from: test.json"
+"Total slides: 2"
+"Loaded 2 slides"
+
+ШАГ 5: Проверьте результат
+----------------------------
+После загрузки должно восстановиться:
+- 2 слайда
+- На слайде 0: Circle (radius 25) и Rectangle (40x30)
+- На слайде 1: Text "Title"
+
+========================================
+АЛЬТЕРНАТИВНЫЙ ПРОСТОЙ ТЕСТ:
+========================================
+
+addslide
+addshape slide 0 type Circle radius 15 x 10 y 20
+save
+load file presentation.json
+
+Должно восстановиться: 1 слайд с 1 кругом
+
+========================================
+

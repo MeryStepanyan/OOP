@@ -1,0 +1,101 @@
+========================================
+ПОШАГОВОЕ ТЕСТИРОВАНИЕ КОМАНД
+========================================
+
+После запуска программы, попробуйте эти команды по порядку:
+
+ШАГ 1: Базовое добавление слайдов
+-----------------------------------
+addslide
+Ожидаемый результат: "Slide added at position 0, Total slides: 1"
+
+addslide
+Ожидаемый результат: "Slide added at position 1, Total slides: 2"
+
+addslide
+Ожидаемый результат: "Slide added at position 2, Total slides: 3"
+
+ШАГ 2: Добавление в середину
+-----------------------------------
+addslide pos 1
+Ожидаемый результат: "Slide added at position 1, Total slides: 4"
+(Новый слайд вставлен в позицию 1, остальные сдвинуты)
+
+addslide pos 0
+Ожидаемый результат: "Slide added at position 0, Total slides: 5"
+(Новый слайд вставлен в начало)
+
+ШАГ 3: Сохранение в файл
+-----------------------------------
+save file test.json
+Ожидаемый результат: "Presentation saved successfully to: test.json"
+
+ИЛИ используйте имя по умолчанию:
+save
+Ожидаемый результат: "Presentation saved successfully to: presentation.json"
+
+ШАГ 4: Удаление слайдов
+-----------------------------------
+removeslide at 1
+Ожидаемый результат: "Slide removed from position 1, Remaining slides: 4"
+
+removeslide
+Ожидаемый результат: "Slide removed from position 3, Remaining slides: 3"
+(Удаляет последний слайд)
+
+ШАГ 5: Загрузка из файла
+-----------------------------------
+load file test.json
+Ожидаемый результат: 
+  "Presentation loaded successfully from: test.json"
+  "Total slides: 5"
+(Должны восстановиться все 5 слайдов, которые были сохранены)
+
+ШАГ 6: Проверка отмены (Undo)
+-----------------------------------
+removeslide at 0
+Ожидаемый результат: "Slide removed from position 0, Remaining slides: 4"
+
+(В будущем можно добавить команду undo для отмены последнего удаления)
+
+ШАГ 7: Проверка ошибок
+-----------------------------------
+removeslide
+removeslide
+removeslide
+removeslide
+removeslide
+removeslide        # Попытка удалить из пустой презентации
+Ожидаемый результат: "Error: Cannot remove slide: repository is empty"
+
+addslide pos 999   # Невалидная позиция
+Ожидаемый результат: "Error: Position ... is out of range"
+
+ШАГ 8: Полный цикл работы
+-----------------------------------
+addslide
+addslide
+addslide
+save file final.json
+removeslide
+removeslide
+load file final.json
+Ожидаемый результат: После загрузки должно быть 3 слайда
+
+exit               # Выход из программы
+
+========================================
+БЫСТРЫЙ ТЕСТ ВСЕХ ФУНКЦИЙ:
+========================================
+
+addslide
+addslide
+addslide pos 1
+save file demo.json
+removeslide at 0
+load file demo.json
+
+После этих команд у вас должно быть 3 слайда (восстановленные из файла)
+
+========================================
+
